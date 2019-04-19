@@ -1,5 +1,22 @@
+execute pathogen#infect()
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+" Initialize plugin system
+call plug#end()
+"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
 set nocompatible
-syntax enable
+syntax on
 filetype plugin on
 filetype indent on
 :let g:html_indent_inctags = "html,body,head,tbody" 
@@ -16,6 +33,18 @@ set expandtab
 runtime macros/matchit.vim
 vmap <Tab> >gv
 vmap <S-Tab> <gv
+
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir' : 'output',
+    \}
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+autocmd BufEnter *.mp :setlocal filetype=javascript
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 
 " enable use of y to copy text (in normal mode)
 set clipboard=unnamedplus
